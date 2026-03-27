@@ -1,6 +1,6 @@
 # 🫁 Medical Image Classifier
 https://yomnaaljabiri.github.io/medical-image-classifier/frontend/
-> AI-powered X-Ray analysis system for detecting COVID-19, Pneumonia, and Normal cases using Deep Learning.
+> X-Ray classifier for COVID-19, Pneumonia & Normal using EfficientNet-B4 — 96.6% accuracy
 
 **Developed by:** Yomna Aljabari
 
