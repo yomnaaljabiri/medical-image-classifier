@@ -1,9 +1,11 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
+import os
+import gdown
 import torch
 import torch.nn as nn
 import torchvision.transforms as T
 from torchvision import models
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 from PIL import Image
 import io
 
@@ -23,13 +25,18 @@ class MedicalClassifier(nn.Module):
         )
     def forward(self, x): return self.backbone(x)
 
+MODEL_PATH = "best_model.pth"
+if not os.path.exists(MODEL_PATH):
+    print("جاري تحميل النموذج...")
+    gdown.download(
+        "https://drive.google.com/uc?id=10knULnWuir91hD4Ai-o5aew91JjhOXWn",
+        MODEL_PATH,
+        quiet=False
+    )
+
 device = torch.device("cpu")
 model = MedicalClassifier()
-model.load_state_dict(torch.load(
-    "../model/best_model.pth",
-    map_location=device,
-    weights_only=True
-))
+model.load_state_dict(torch.load(MODEL_PATH, map_location=device, weights_only=True))
 model.eval()
 
 transform = T.Compose([
@@ -53,4 +60,4 @@ def predict():
     })
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(host="0.0.0.0", port=5000)

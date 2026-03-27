@@ -6,3 +6,9 @@ Pillow
 scikit-learn
 opencv-python
 numpy
+flask
+flask-cors
+torch
+torchvision
+Pillow
+gdown
