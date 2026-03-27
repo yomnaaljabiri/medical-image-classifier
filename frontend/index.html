@@ -387,7 +387,7 @@ async function analyze() {
   formData.append('file', selectedFile);
 
   try {
-    const res = await fetch('http://127.0.0.1:5000/predict', { method:'POST', body:formData });
+   const res = await fetch('https://medical-image-classifier-1.onrender.com/predict', { method:'POST', body:formData });
     const data = await res.json();
     const probs = [data.probabilities['طبيعي'], data.probabilities['التهاب رئوي'], data.probabilities['COVID-19']];
     const isAlert = data.diagnosis !== 'طبيعي';
